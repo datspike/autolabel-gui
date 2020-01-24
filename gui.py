@@ -1,6 +1,7 @@
 # coding=utf-8
 from shutil import copyfile
 import PySimpleGUI as sg
+import sys
 from autolabel.autolabel import *
 
 sg.theme('SystemDefault')  # Add a touch of color
@@ -36,9 +37,22 @@ checkbox_dict = {'LeftTopCB': (0, 0),
                  'LeftBottomCB': (0, 1),
                  'RightBottomCB': (1, 1)}
 
+
+def resource_path(relative_path):
+    """
+    Get absolute path to resource, works for dev and for PyInstaller
+    """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 # Create the Window
 window = sg.Window('Autolabel-GUI', layout)
-
 while True:
     event, values = window.read()
     if event in (None, 'Cancel'):
@@ -62,7 +76,7 @@ while True:
         print('Работаем с папкой: {}'.format(folder_path))
         # copy a default new table to folder
         table_path = folder_path + '/autolabel.xlsx'
-        copyfile('autolabel/example.xlsx', table_path)
+        copyfile(resource_path('autolabel/example.xlsx'), table_path)
         print('Создана таблица: {}'.format(table_path))
         # write folder_path to the new table
         work_book = load_workbook(table_path)
