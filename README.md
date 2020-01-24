@@ -1,4 +1,4 @@
-# autolabel-gui (WIP)
-GUI для autolabel (автоматического этикетирования изображений)
+# autolabel-gui
+GUI для [autolabel](https://github.com/datspike/autolabel) (автоматического этикетирования изображений)
 
-![img](https://i.imgur.com/tC0hYqP.png)
+![img](https://i.imgur.com/GsAVkWR.png)
